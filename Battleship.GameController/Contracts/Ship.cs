@@ -51,6 +51,7 @@ namespace Battleship.GameController.Contracts
         public int Size { get; set; }
 
         public bool die { get; set; }
+        public bool isSunk { get; set; }
 
         #endregion
 

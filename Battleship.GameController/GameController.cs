@@ -48,9 +48,8 @@ namespace Battleship.GameController
                 {
                     if (position.Equals(shot))
                     {
-                        //ships.ToList().Remove(ship);
-                        //ships = ships.Where(x => x.Name != ship.Name);
                         ship.die = true;
+                        position.IsPositionHit = true;
                         return true;
                     }
                 }
@@ -79,6 +78,72 @@ namespace Battleship.GameController
         public static bool IsShotValid(int row)
         {
             return row <= 8;
+        }
+
+        public static bool IsShipSunk(IEnumerable<Ship> ships)
+        {
+            if (ships == null)
+            {
+                throw new ArgumentNullException("ships");
+            }
+            var count = 0;
+
+            foreach (var ship in ships)
+            {
+                if (!ship.isSunk)
+                {
+                    foreach (var position in ship.Positions)
+                    {
+                        if (position.IsPositionHit)
+                        {
+                            count++;
+                        }
+                    }
+                    if (count == ship.Size)
+                    {
+                        ship.isSunk = true;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public static string ShipsSunk(IEnumerable<Ship> ships)
+        {
+            if (ships == null)
+            {
+                throw new ArgumentNullException("ships");
+            }
+            var shipsSunk = "";
+
+            foreach (var ship in ships)
+            {                
+                if (ship.isSunk)
+                {
+                    shipsSunk += ship.Name + "\n";
+                }
+            }
+            return shipsSunk;
+        }
+
+        public static string ShipsAlive(IEnumerable<Ship> ships)
+        {
+            if (ships == null)
+            {
+                throw new ArgumentNullException("ships");
+            }
+            
+            var shipsAlive = "";
+
+            foreach (var ship in ships)
+            {
+                if (!ship.isSunk)
+                {
+                    shipsAlive += ship.Name + "\n";
+                }
+            }
+            return shipsAlive;
         }
 
         /// <summary>

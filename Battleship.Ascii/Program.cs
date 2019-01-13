@@ -81,6 +81,25 @@ namespace Battleship.Ascii
                     Console.WriteLine(@"            -   (\- |  \ /  |  /)  -");
                     Console.WriteLine(@"                 -\  \     /  /-");
                     Console.WriteLine(@"                   \  \   /  /");
+
+                    var isSunk = GameController.IsShipSunk(enemyFleet);
+                    if (isSunk)
+                    {
+                        
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Ships is sunk !!!!!!!!!!!!!!");                        
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("Ships sunk: ");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(GameController.ShipsSunk(enemyFleet));
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("-----------------------------------------");
+                        Console.WriteLine("Ships alive: ");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine(GameController.ShipsAlive(enemyFleet));
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("-----------------------------------------");
+                    }
                     if (enemyFleet.All(x => x.die))
                     {
                         IsEndGame = true;
@@ -106,7 +125,23 @@ namespace Battleship.Ascii
                     Console.WriteLine(@"            -   (\- |  \ /  |  /)  -");
                     Console.WriteLine(@"                 -\  \     /  /-");
                     Console.WriteLine(@"                   \  \   /  /");
-
+                    var isSunk = GameController.IsShipSunk(myFleet);
+                    if (isSunk)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Ships is sunk !!!!!!!!!!!!!!");                        
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("Ships sunk: ");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(GameController.ShipsSunk(myFleet));
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("-----------------------------------------");
+                        Console.WriteLine("Ships alive: ");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine(GameController.ShipsAlive(myFleet));
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("-----------------------------------------");
+                    }
                     if (myFleet.All(x => x.die))
                     {
                         IsEndGame = true;
