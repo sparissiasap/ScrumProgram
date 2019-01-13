@@ -56,6 +56,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IsShipSunk.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IsShipSunk.feature</DependentUpon>
+    </Compile>
+    <Compile Include="IsShipSunkSteps.cs" />
     <Compile Include="IsShipValid.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -66,6 +72,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="IsShipSunk.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>IsShipSunk.feature.cs</LastGenOutput>
+    </None>
     <None Include="IsShipValid.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>IsShipValid.feature.cs</LastGenOutput>

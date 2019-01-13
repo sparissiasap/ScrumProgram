@@ -20,6 +20,7 @@
         {
             Column = column;
             Row = row;
+            IsPositionHit = false;
         }
 
         /// <summary>
@@ -27,6 +28,7 @@
         /// </summary>
         public Position()
         {
+            IsPositionHit = false;
         }
 
         #endregion
@@ -42,8 +44,9 @@
         ///     Gets or sets the row.
         /// </summary>
         public int Row { get; set; }
+        public bool IsPositionHit { get; set; }
 
-        #endregion
+        #endregion        
 
         #region Public Methods and Operators
 
