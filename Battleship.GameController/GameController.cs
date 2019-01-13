@@ -76,6 +76,11 @@ namespace Battleship.GameController
                        };
         }
 
+        public static bool IsShotValid(int row)
+        {
+            return row <= 8;
+        }
+
         /// <summary>
         /// The is ships valid.
         /// </summary>

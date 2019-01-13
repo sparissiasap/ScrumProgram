@@ -57,7 +57,17 @@ namespace Battleship.Ascii
                 Console.WriteLine();
                 Console.WriteLine("Player, it's your turn");
                 Console.WriteLine("Enter coordinates for your shot :");
-                var position = ParsePosition(Console.ReadLine());
+                var str = Console.ReadLine();
+                if (string.IsNullOrEmpty(str))
+                {
+                    continue;
+                }
+                var position = ParsePosition(str);
+                if (!GameController.IsShotValid(position.Row))
+                {
+                    Console.WriteLine("Out of Playing Area");
+                    continue;
+                }
                 var isHit = GameController.CheckIsHit(enemyFleet, position);
                 if (isHit)
                 {
@@ -113,7 +123,8 @@ namespace Battleship.Ascii
       {
          var userStrn = GameController.GetUserStrn(input);
          var letter = (Letters)Enum.Parse(typeof(Letters), userStrn.ToUpper().Substring(0, 1));
-         var number = int.Parse(input.Substring(1, 1));
+         var number = 0;
+         int.TryParse(input.Substring(1, input.Length - 1), out number);
          return new Position(letter, number);
       }
 
@@ -141,17 +152,22 @@ namespace Battleship.Ascii
 
          Console.WriteLine("Please position your fleet (Game board size is from A to H and 1 to 8) :");
 
-         foreach (var ship in myFleet)
-         {
-            Console.WriteLine();
-            Console.WriteLine("Please enter the positions for the {0} (size: {1})", ship.Name, ship.Size);
-            for (var i = 1; i <= ship.Size; i++)
+            foreach (var ship in myFleet)
             {
-               Console.WriteLine("Enter position {0} of {1} (i.e A3):", i, ship.Size);
-               ship.AddPosition(Console.ReadLine());
+                Console.WriteLine();
+                Console.WriteLine("Please enter the positions for the {0} (size: {1})", ship.Name, ship.Size);
+                for (var i = 1; i <= ship.Size; i++)
+                {
+                    Console.WriteLine("Enter position {0} of {1} (i.e A3):", i, ship.Size);
+                    var position = Console.ReadLine();
+                    while (string.IsNullOrEmpty(position) || !GameController.IsShotValid(ParsePosition(position).Row) || ParsePosition(position).Row == 0)
+                    {
+                        position = Console.ReadLine();
+                    }
+                    ship.AddPosition(position);
+                }
             }
-         }
-      }
+        }
 
       private static void InitializeEnemyFleet()
       {
