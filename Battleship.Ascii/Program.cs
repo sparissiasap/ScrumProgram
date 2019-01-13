@@ -158,12 +158,14 @@ namespace Battleship.Ascii
                 Console.WriteLine("Please enter the positions for the {0} (size: {1})", ship.Name, ship.Size);
                 for (var i = 1; i <= ship.Size; i++)
                 {
-                    Console.WriteLine("Enter position {0} of {1} (i.e A3):", i, ship.Size);
-                    var position = Console.ReadLine();
-                    while (string.IsNullOrEmpty(position) || !GameController.IsShotValid(ParsePosition(position).Row) || ParsePosition(position).Row == 0)
+                    //Console.WriteLine("Enter a valid position for the {0} of {1} (i.e A3):", i, ship.Size);
+                    var position = string.Empty;
+                    do
                     {
+                        Console.WriteLine("Enter a valid position for the {0} of {1} (i.e A3):", i, ship.Size);
+                        //Console.WriteLine("Insert a valid position");
                         position = Console.ReadLine();
-                    }
+                    } while (!GameController.IsShotValid(ParsePosition(position).Row) || !ship.IsValidPosition(position, myFleet));
                     ship.AddPosition(position);
                 }
             }

@@ -1,7 +1,7 @@
 ﻿namespace Battleship.GameController.Tests.GameControllerTests
 {
     using System.Collections.Generic;
-
+    using System.Linq;
     using Battleship.GameController.Contracts;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -47,7 +47,24 @@
             var ship = new Ship();
             ship.AddPosition("");
 
-            Assert.IsTrue(ship.Positions.Count > 0);
+            Assert.IsTrue(ship.Positions.Count == 0);
+        }
+
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
+        public void DontAllowToOverlapAShip()
+        {
+            var ships = GameController.InitializeShips().ToList();
+            ships[0].AddPosition("A1");
+
+            Assert.IsFalse(ships[0].IsValidPosition("A1", ships));
+            Assert.IsTrue(ships[0].Positions.Count > 0);
+        }
+
+        [TestMethod]
+        public void IsValidPositionTest()
+        {
+            var ships = GameController.InitializeShips().ToList();
+            Assert.IsTrue(ships[0].IsValidPosition("A1", ships));
         }
     }
 }
