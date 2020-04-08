@@ -1,0 +1,7 @@
+{
+  "name": "App",
+  "displayName": "App",
+  "loginUrl": "https://api.asapconnected.com/api/ValidateCustomerAccount",
+  "imageurl": "https://api.asapconnected.com/api/CustomerProfileImage",
+  "CustomerLoggedID": "CustomerLoggedID"
+}
